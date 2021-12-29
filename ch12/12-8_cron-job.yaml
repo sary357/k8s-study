@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: example-cron
+spec:
+  # run every 3 mins
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template: 
+        spec:
+          containers:
+          - name: batch-job
+            image: gcr.io/kuar-demo/kuard-amd64:blue
+            args:
+            - "/bin/date"
+          restartPolicy: OnFailure
