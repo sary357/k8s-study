@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  13-1_my-config.txt: |+
+    parameter1 = value1
+    parameter2 = value2
+
+  another-param: another-value
+  extra-param: extra-value
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-12-30T01:23:32Z"
+  name: my-config
+  namespace: default
+  resourceVersion: "14950189"
+  uid: 7df148a4-7697-477e-8005-176f888a1f8d
