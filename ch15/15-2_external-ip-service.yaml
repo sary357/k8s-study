@@ -1,0 +1,6 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: external-ip-database
+spec:
+  
