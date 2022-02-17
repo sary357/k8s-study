@@ -49,3 +49,9 @@ $ kubectl get deployments -L canary
 ```
 $ kubectl label deployments alpaca-test "canary-"
 ```
+
+7. delete all deployments
+
+```
+$ kubectl delete deployments --all
+```
