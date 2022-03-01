@@ -33,12 +33,13 @@ resource "google_container_cluster" "primary" {
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
-  remove_default_node_pool = false
+  remove_default_node_pool = true
   initial_node_count       = 1
   node_config {
     service_account = var.service_account
     machine_type = "n1-standard-2"
-    image_type   = "COS"
+    image_type   = "COS" # GKE does not support COS
+    # image_type = "COS_CONTAINERD"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
@@ -81,7 +82,8 @@ resource "google_container_node_pool" "primary_nodes" {
 
     # preemptible  = true
     machine_type = "n1-standard-2"
-    image_type   = "COS"
+    # image_type   = "COS" # GKE does not support COS
+    image_type   = "COS_CONTAINERD"
     tags         = ["gke-node", "${var.project_id}-${var.my_name}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
