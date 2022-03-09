@@ -1,6 +1,6 @@
 - Commands used in this chapter
 
-1. create a deployment called `alpaca-prod`
+1. create a deployment called `alpaca-prod`. P.S all labels will be only saved in `deployment`.  The rest objects will not keep these labels
 
 ```
 $ kubectl create deployment alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --replicas=2 
