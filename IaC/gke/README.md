@@ -129,5 +129,6 @@ google_container_node_pool.primary_nodes2: Refreshing state... [id=projects/gogo
 
 No changes. Your infrastructure matches the configuration.
 
-
 ```
+
+- Now, your terraform files, tfstate file and remote GKE clusters are synced. You're free to use `terraform apply` without worrying any clusters will be removed by accident.
