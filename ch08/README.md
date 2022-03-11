@@ -69,6 +69,5 @@ alpaca       ClusterIP   10.216.15.21   <none>        8080/TCP       46s     app
 bandicoot    ClusterIP   10.216.15.71   <none>        8080/TCP       15s     app=bandicoot
 be-default   ClusterIP   10.216.11.67   <none>        8080/TCP       2m20s   app=be-default
 kubernetes   ClusterIP   10.216.0.1     <none>        443/TCP        251d    <none>
-web          NodePort    10.216.6.194   <none>        80:32343/TCP   13d     run=web
 
 ```
