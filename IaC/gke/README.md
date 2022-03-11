@@ -72,6 +72,51 @@ $ terraform apply -refresh-only
 ...
 ```
 
+- update gke.tf 1) remove_default_node_pool = true 2) comment out node_config in default_node_pool
+
+```
+resource "google_container_cluster" "primary" {
+  name     = "${var.project_id}-${var.my_name}-gke"
+  location = var.zone
+  min_master_version = var.gke_version
+  # node_version = var.gke_version
+  # We can't create a cluster with no node pool defined, but we want to only use
+  # separately managed node pools. So we create the smallest possible default
+  # node pool and immediately delete it.
+  remove_default_node_pool = true # modify remove_default_node_pool = true
+  initial_node_count       = 1
+
+  /* comment out node_config
+  node_config {
+    service_account = var.service_account
+    machine_type = "e2-micro"
+    # image_type   = "COS" # GKE does not support COS
+    image_type = "COS_CONTAINERD"
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+
+    labels = {
+      foo = "qqq"
+    }
+  } */
+
+  release_channel {
+    channel = "RAPID"
+  }
+  timeouts {
+    create = "10m"
+    update = "20m"
+  }
+
+  network    = google_compute_network.vpc.name
+  subnetwork = google_compute_subnetwork.subnet.name
+}
+
+....
+
+```
+
 - execute `terraform plan`. 
 ```
 $ terraform plan
