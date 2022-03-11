@@ -71,3 +71,40 @@ be-default   ClusterIP   10.216.11.67   <none>        8080/TCP       2m20s   app
 kubernetes   ClusterIP   10.216.0.1     <none>        443/TCP        251d    <none>
 
 ```
+
+# apply 8-1_simple-ingress.yaml
+
+```
+$ kubectl apply -f 8-1_simple-ingress.yaml
+```
+
+# verify
+
+```
+$ kubectl get ingress
+NAME             CLASS    HOSTS   ADDRESS          PORTS   AGE
+simple-ingress   <none>   *       35.247.135.128   80      115s
+$ kubectl describe ingress simple-ingress
+Name:             simple-ingress
+Labels:           <none>
+Namespace:        default
+Address:          35.247.135.128
+Default backend:  alpaca:8080 (10.212.4.23:8080,10.212.4.24:8080,10.212.4.25:8080)
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           *     alpaca:8080 (10.212.4.23:8080,10.212.4.24:8080,10.212.4.25:8080)
+Annotations:  ingress.kubernetes.io/backends: {"k8s1-16742a51-default-alpaca-8080-70b5ddce":"HEALTHY"}
+              ingress.kubernetes.io/forwarding-rule: k8s2-fr-x4xdyn98-default-simple-ingress-2441as3f
+              ingress.kubernetes.io/target-proxy: k8s2-tp-x4xdyn98-default-simple-ingress-2441as3f
+              ingress.kubernetes.io/url-map: k8s2-um-x4xdyn98-default-simple-ingress-2441as3f
+Events:
+  Type    Reason     Age                   From                     Message
+  ----    ------     ----                  ----                     -------
+  Normal  Sync       103s                  loadbalancer-controller  UrlMap "k8s2-um-x4xdyn98-default-simple-ingress-2441as3f" created
+  Normal  Sync       99s                   loadbalancer-controller  TargetProxy "k8s2-tp-x4xdyn98-default-simple-ingress-2441as3f" created
+  Normal  Sync       89s                   loadbalancer-controller  ForwardingRule "k8s2-fr-x4xdyn98-default-simple-ingress-2441as3f" created
+  Normal  IPChanged  12s (x6 over 88s)     loadbalancer-controller  IP is now 34.102.155.51
+  Normal  Sync       11s (x16 over 2m26s)  loadbalancer-controller  Scheduled for sync
+
+```

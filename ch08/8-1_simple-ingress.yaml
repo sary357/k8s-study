@@ -4,5 +4,5 @@ metadata:
   name: simple-ingress
 spec:
   backend:
-    serviceName: alpaca-prod
+    serviceName: alpaca
     servicePort: 8080
