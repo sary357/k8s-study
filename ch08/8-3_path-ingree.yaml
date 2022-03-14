@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: path-ingress
@@ -8,11 +8,17 @@ spec:
     http:
       paths:
         - path: "/"
+          pathType: Prefix
           backend:
-            serviceName: bandicoot-prod
-            servicePort: 8080
+            service:
+              name: bandicoot
+              port: 
+                number: 8080
         - path: "/a/"
+          pathType: Prefix
           backend:
-            serviceName: alpaca-prod
-            servicePort: 8080
+            service:
+              name: alpaca
+              port: 
+                number: 8080
           

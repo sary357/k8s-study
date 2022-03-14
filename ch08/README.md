@@ -108,3 +108,82 @@ Events:
   Normal  Sync       11s (x16 over 2m26s)  loadbalancer-controller  Scheduled for sync
 
 ```
+
+# apply 8-2_host-ingress.yaml
+
+```
+$ kubectl apply -f 8-2_host-ingress.yaml
+```
+
+# Verify
+
+```
+$ kubectl get ingress
+NAME            CLASS    HOSTS                ADDRESS          PORTS   AGE
+basic-ingress   <none>   *                    35.247.135.128   80      16d
+host-ingress    <none>   alpaca.example.com   35.247.135.128   80      17s
+
+$ kubectl describe ingress host-ingress
+Name:             host-ingress
+Labels:           <none>
+Namespace:        default
+Address:          35.247.135.128
+Default backend:  default-http-backend:80 (10.212.1.10:8080)
+Rules:
+  Host                Path  Backends
+  ----                ----  --------
+  alpaca.example.com  
+                      /   alpaca:8080 (10.212.1.22:8080,10.212.1.3:8080,10.212.1.5:8080)
+Annotations:          <none>
+Events:
+  Type    Reason  Age                From                     Message
+  ----    ------  ----               ----                     -------
+  Normal  Sync    31s (x3 over 37s)  loadbalancer-controller  Scheduled for sync
+
+```
+
+# check http://alpaca.example.com on browser (Chrome or safari)
+
+# apply  8-3_path-ingree.yaml
+
+```
+$ kubectl apply -f  8-3_path-ingree.yaml
+```
+
+# check 1) http://bandicoot.example.com/ and 2) http://bandicoot.example.com/a/. Then, compare the difference.
+
+# remove them all.
+
+```
+$ kubectl get ingress
+
+$ kubectl delete ingress host-ingress path-ingress simple-ingress
+
+$ kubectl get services
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+alpaca       ClusterIP   10.216.15.21   <none>        8080/TCP       3d
+bandicoot    ClusterIP   10.216.15.71   <none>        8080/TCP       3d
+be-default   ClusterIP   10.216.11.67   <none>        8080/TCP       3d
+kubernetes   ClusterIP   10.216.0.1     <none>        443/TCP        254d
+web          NodePort    10.216.6.194   <none>        80:32343/TCP   16d
+
+$ kubectl delete services  alpaca bandicoot be-default
+service "alpaca" deleted
+service "bandicoot" deleted
+service "be-default" deleted
+
+$ kubectl get deployments
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+alpaca       3/3     3            3           3d
+bandicoot    3/3     3            3           3d
+be-default   3/3     3            3           3d
+web          1/1     1            1           16d
+
+$ kubectl delete deployments alpaca bandicoot be-default 
+deployment.apps "alpaca" deleted
+deployment.apps "bandicoot" deleted
+deployment.apps "be-default" deleted
+
+```
+
+---- 
