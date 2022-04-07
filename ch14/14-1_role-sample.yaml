@@ -5,5 +5,5 @@ metadata:
   name: pod-and-services
 rules:
 - apiGroups: [""]
-  resources: ["pods", "services"]
+  resources: ["pods", "services", "statefulsets"]
   verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
