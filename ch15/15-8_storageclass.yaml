@@ -6,8 +6,8 @@ metadata:
     storageclass.beta.kubernetes.io/is-default-class: "true"
   labels:
     kubernetes.io/cluster-service: "true"
-provisioner: kubernetes.io/gce-pd
-parameters:  # use GCP in this example
+provisioner: kubernetes.io/gce-pd # for GCP (GCE PD)
+parameters:
   type: pd-standard
   fstype: ext4
-volumeBindingMode: WaitForFirstConsumer
+  replication-type: none
