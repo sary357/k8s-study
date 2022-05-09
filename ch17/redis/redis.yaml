@@ -12,11 +12,12 @@ spec:
     metadata:
       labels:
         app: redis
+
     spec:
       containers:
-      - name: redis
+      - command: [sh, -c, source  /redis-config/init.sh]
         image: redis:4.0.11-alpine
-        command: [sh, -c, source /redis-config/init.sh ]
+        name: redis
         ports:
         - containerPort: 6379
           name: redis
@@ -25,19 +26,19 @@ spec:
           name: config
         - mountPath: /redis-data
           name: data
-      - name: sentinel
+         
+      - command: [sh, -c, source  /redis-config-src/sentinel.sh]
         image: redis:4.0.11-alpine
-        command: [sh, -c, source /redis-config-src/sentinel.sh ]
+        name: sentinel
         volumeMounts:
         - mountPath: /redis-config-src
           name: config
         - mountPath: /redis-config
           name: data
       volumes:
-      - name: config
-        configMap:
+      - configMap:
           defaultMode: 420
-          name: "redis-config"
+          name: redis-config
+        name: config
       - name: data
         emptyDir: {}
-

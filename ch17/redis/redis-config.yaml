@@ -40,8 +40,5 @@ data:
     slaveof redis-0.redis 6379
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2022-01-19T01:32:50Z"
   name: redis-config
   namespace: default
-  resourceVersion: "26401107"
-  uid: abc2899f-79f7-471d-8ec0-312947b2ba95

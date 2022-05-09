@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   labels:
     run: jupyter
-  name: jupyter
   namespace: jupyter
+  name: jupyter
 spec:
   replicas: 1
   selector:
@@ -12,12 +12,11 @@ spec:
       run: jupyter
   template:
     metadata:
-      labels: 
+      labels:
         run: jupyter
     spec:
       containers:
-      - image: jupyter/scipy-notebook:python-3.9.7
+      - image: jupyter/scipy-notebook:4b830d5897d8
         name: jupyter
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-
