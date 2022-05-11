@@ -1,11 +1,11 @@
 ## Quickstart
 - add a chart repo
 ```
-$ helm repo add bitnami https://charts.bitnami.com/bitnami
+ $ helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 - list charts in repo
 ```
-$ helm search repo bitnami
+ $ helm search repo bitnami
 NAME                                        	CHART VERSION	APP VERSION  	DESCRIPTION                                       
 bitnami/bitnami-common                      	0.0.9        	0.0.9        	DEPRECATED Chart with custom templates used in ...
 bitnami/airflow                             	12.0.16      	2.2.4        	Apache Airflow is a tool to express and execute...
@@ -21,12 +21,12 @@ bitnami/concourse                           	1.0.12       	7.7.1        	Concour
 ```
 - update repo
 ```
-$ helm repo update
+ $ helm repo update
 ```
 
 - install a sample chart
 ```
-$ helm install bitnami/mysql --generate-name
+ $ helm install bitnami/mysql --generate-name
 NAME: mysql-1652231623
 LAST DEPLOYED: Wed May 11 09:13:50 2022
 NAMESPACE: default
@@ -158,16 +158,16 @@ version: 8.9.6
 - get all info about mysql chart
 
 ```
-$ helm show all bitnami/mysql
+ $ helm show all bitnami/mysql
 ```
 
 - list down all release
 ```
-$ helm list
+ $ helm list
 NAME            	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART      	APP VERSION
 mysql-1652231623	default  	1       	2022-05-11 09:13:50.515179 +0800 CST	deployed	mysql-8.9.6	8.0.29     
 
-$ helm ls
+ $ helm ls
 NAME            	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART      	APP VERSION
 mysql-1652231623	default  	1       	2022-05-11 09:13:50.515179 +0800 CST	deployed	mysql-8.9.6	8.0.29     
 
@@ -176,10 +176,10 @@ mysql-1652231623	default  	1       	2022-05-11 09:13:50.515179 +0800 CST	deploye
 - uninstall a release
 
 ```
-$ helm uninstall mysql-1652232545 --keep-history      # if we have the option "--keep-history "
+ $ helm uninstall mysql-1652232545 --keep-history      # if we have the option "--keep-history "
 release "mysql-1652232545" uninstalled
 
-$ helm status mysql-1652232545   # we can still search for the status and its status = uninstalled
+ $ helm status mysql-1652232545   # we can still search for the status and its status = uninstalled
 NAME: mysql-1652232545
 LAST DEPLOYED: Wed May 11 09:29:10 2022
 NAMESPACE: default
@@ -200,9 +200,14 @@ Tip:
 
 - rollback (it DOES NOT work!!)
 ```
-$  helm rollback  mysql-1652232545
+ $  helm rollback  mysql-1652232545
 Error: release: not found
 
+```
+
+- get help
+```
+ $ helm get -h
 ```
 
 ## References
