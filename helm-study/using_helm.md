@@ -113,6 +113,7 @@ NAME: happy-panda
 LAST DEPLOYED: Fri May 13 09:24:03 2022
 NAMESPACE: default
 STATUS: deployed
+
 ```
 
 ## Customizing the Chart Before Installing
