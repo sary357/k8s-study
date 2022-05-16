@@ -113,9 +113,6 @@ NAME: happy-panda
 LAST DEPLOYED: Fri May 13 09:24:03 2022
 NAMESPACE: default
 STATUS: deployed
-...
-...
-...
 ```
 
 ## Customizing the Chart Before Installing
@@ -147,7 +144,6 @@ global:
 ## @param kubeVersion Override Kubernetes version
 ##
 kubeVersion: ""
-...
 ```
 
 - override default setting. db name: user0db, user name: user0
