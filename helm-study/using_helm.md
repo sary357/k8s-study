@@ -101,3 +101,77 @@ NAME            	NAMESPACE	REVISION	UPDATED                             	STATUS 
 mysql-1652405170	default  	1       	2022-05-13 09:26:15.721213 +0800 CST	deployed	mysql-8.9.6	8.0.29     
 
 ```
+
+- because helm won't wait until everything is installed. we can use `helm status` to know current release state
+
+```
+$ helm status happy-pandas
+
+```
+$ helm status happy-panda
+NAME: happy-panda
+LAST DEPLOYED: Fri May 13 09:24:03 2022
+NAMESPACE: default
+STATUS: deployed
+...
+...
+...
+```
+
+## Customizing the Chart Before Installing
+- show what options are configurable
+```
+$ helm show values bitnami/wordpress
+## @section Global parameters
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+##
+
+## @param global.imageRegistry Global Docker image registry
+## @param global.imagePullSecrets Global Docker registry secret names as an array
+## @param global.storageClass Global StorageClass for Persistent Volume(s)
+##
+global:
+  imageRegistry: ""
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+  storageClass: ""
+
+## @section Common parameters
+##
+
+## @param kubeVersion Override Kubernetes version
+##
+kubeVersion: ""
+...
+```
+
+- override default setting. db name: user0db, user name: user0
+```
+$ echo '{mariadb.auth.database: user0db, mariadb.auth.username: user0}' > values.yaml
+$ helm install -f values.yaml bitnami/wordpress --generate-name
+```
+
+- `'{outer.name1: value1, outer.name2: value2}'` is equivalent of
+```
+outer:
+  name1: value1
+  name2: value2
+```
+
+- `'{servers[0].port=80}'` is equivalent of
+```
+servers:
+  - port: 80
+```
+
+- `'{servers[0].port 80, servers[0].host example}'`
+```
+servers:
+  - port: 80
+    host: example
+```
