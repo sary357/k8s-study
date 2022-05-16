@@ -105,9 +105,6 @@ mysql-1652405170	default  	1       	2022-05-13 09:26:15.721213 +0800 CST	deploye
 - because helm won't wait until everything is installed. we can use `helm status` to know current release state
 
 ```
-$ helm status happy-pandas
-
-```
 $ helm status happy-panda
 NAME: happy-panda
 LAST DEPLOYED: Fri May 13 09:24:03 2022
