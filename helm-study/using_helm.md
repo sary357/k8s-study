@@ -169,3 +169,139 @@ servers:
   - port: 80
     host: example
 ```
+
+## helm upgrade and helm rollback
+- current installation
+```
+$ helm ls
+NAME                	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART           	APP VERSION
+wordpress-1652666276	default  	1       	2022-05-16 09:58:02.115471 +0800 CST	deployed	wordpress-14.0.7	5.9.3      
+
+$ helm get values wordpress-1652666276
+USER-SUPPLIED VALUES:
+mariadb.auth.database: user0db
+mariadb.auth.username: user0
+
+```
+
+- we have a file called `panda.yaml`. The following is the content
+```
+$ cat panda.yaml 
+mariadb.auth.username: user1
+```
+
+- helm only preform the least invasive(侵入性) upgrade. It only update parts that changed in the latest release.
+```
+$ helm upgrade -f panda.yaml wordpress-1652666276 bitnami/wordpress
+Release "wordpress-1652666276" has been upgraded. Happy Helming!
+NAME: wordpress-1652666276
+LAST DEPLOYED: Tue May 17 09:20:46 2022
+NAMESPACE: default
+STATUS: deployed
+REVISION: 2
+.......
+
+```
+
+- Let's check with `helm get values wordpress-1652666276`
+```
+$ helm get values wordpress-1652666276
+USER-SUPPLIED VALUES:
+mariadb.auth.username: user1
+```
+
+- we can use `helm rollback REVISION` to rollback to previous version.
+```
+$ helm rollback wordpress-1652666276 1
+Rollback was a success! Happy Helming!
+
+$ helm get values wordpress-1652666276
+USER-SUPPLIED VALUES:
+mariadb.auth.database: user0db
+mariadb.auth.username: user0
+
+$ helm status  wordpress-1652666276
+NAME: wordpress-1652666276
+LAST DEPLOYED: Tue May 17 09:22:02 2022
+NAMESPACE: default
+STATUS: deployed
+REVISION: 3       ----------------------> it become 3, not 1
+TEST SUITE: None
+
+```
+
+- everytime we install/upgrade/rollback, the revision number is incremented by 1. The 1st revision is always `1`
+
+- we can see revision number with the command `helm history RELEASE`
+```
+$ helm history  wordpress-1652666276
+REVISION	UPDATED                 	STATUS    	CHART           	APP VERSION	DESCRIPTION     
+1       	Mon May 16 09:58:02 2022	superseded	wordpress-14.0.7	5.9.3      	Install complete
+2       	Tue May 17 09:20:46 2022	superseded	wordpress-14.0.7	5.9.3      	Upgrade complete
+3       	Tue May 17 09:22:02 2022	deployed  	wordpress-14.0.7	5.9.3      	Rollback to 1   
+
+```
+## helm uninstall
+- We can uninstall a release with `helm uninstall RELEASE`
+```
+$ helm ls # current release list
+NAME                	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART           	APP VERSION
+wordpress-1652666276	default  	3       	2022-05-17 09:22:02.745246 +0800 CST	deployed	wordpress-14.0.7	5.9.3      
+
+$ helm uninstall wordpress-1652666276          # uninstall wordpress-1652666276 
+release "wordpress-1652666276" uninstalled
+
+$ helm ls     # wordpress-1652666276 has been uninstalled
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+
+```
+
+- You can use `--keep-history` to keep installation history
+```
+$ helm ls
+NAME                	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART           	APP VERSION
+wordpress-1652751577	default  	1       	2022-05-17 09:39:42.309913 +0800 CST	deployed	wordpress-14.0.7	5.9.3      
+
+$ helm uninstall wordpress-1652751577 --keep-history 
+release "wordpress-1652751577" uninstalled
+
+$ helm list --uninstalled
+NAME                	NAMESPACE	REVISION	UPDATED                             	STATUS     	CHART           	APP VERSION
+wordpress-1652751577	default  	1       	2022-05-17 09:39:42.309913 +0800 CST	uninstalled	wordpress-14.0.7	5.9.3      
+
+```
+
+- `helm list --all` will list 1. uninstalled release with `--keep-history` and 2. failed release
+```
+$ helm list --all
+NAME                	NAMESPACE	REVISION	UPDATED                             	STATUS     	CHART           	APP VERSION
+mysql-1652232545    	default  	1       	2022-05-11 09:29:10.938394 +0800 CST	uninstalled	mysql-8.9.6     	8.0.29     
+mysql-1652233462    	default  	1       	2022-05-11 09:44:27.587542 +0800 CST	uninstalled	mysql-8.9.6     	8.0.29     
+wordpress-1652751577	default  	1       	2022-05-17 09:39:42.309913 +0800 CST	uninstalled	wordpress-14.0.7	5.9.3    
+```
+
+## helm repo
+- `helm repo list`: list repo
+```
+$ helm repo list
+NAME   	URL                                 
+bitnami	https://charts.bitnami.com/bitnami  
+brigade	https://brigadecore.github.io/charts
+```
+
+- `helm repo add `: add a repo
+```
+$ helm repo add dev https://example.com/dev-charts
+```
+
+- `helm repo update`: sync remote repo to local
+```
+$ helm repo update bitnami
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+```
+
+## Reference
+- https://docs.helm.sh/docs/intro/using_helm/
