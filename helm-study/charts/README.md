@@ -31,4 +31,5 @@ templates/NOTES.txt:  A plain text file containing short usage notes
 
 
 ## Reference
+- `SemVer`: we can think version value format is `major_version`.`minor_version`.`patch_number`
 - https://helm.sh/docs/topics/charts/
