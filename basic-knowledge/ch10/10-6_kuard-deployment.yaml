@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: kuard
+  
+spec: 
+  revisionHistoryLimit: 14 # only 14 revision records are kept
+  selector:
+    matchLabels:
+      run: kuard
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25% 
+      maxUnavailable: 25% 
+  template:
+    metadata:
+      labels:
+        run: kuard
+      annotations:
+        kubernetes.io/change-cause: "Update to blue kuard+maxSurge+maxUnavailable setting"
+    spec:
+      containers:
+      - name: kuard
+        image: gcr.io/kuar-demo/kuard-amd64:blue
+
+
