@@ -1,0 +1,11 @@
+apiVersion: beta.kuar.com/v1
+kind: LoadTest
+metadata: # follow 16-1_crd_first_sample.yaml
+  name: my-loadtest
+spec: # follow 16-1_crd_first_sample.yaml
+  loadSpec: "dummy spec"
+  image: alpine:3.15.4
+  
+
+
+

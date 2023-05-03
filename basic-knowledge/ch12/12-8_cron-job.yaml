@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: example-cron
+spec:
+  schedule: "*/3 * * * *"
+
+  # remove pods if it completes
+  # successfulJobsHistoryLimit: 0
+  # failedJobsHistoryLimit: 0
+
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: batch-job
+            image: alpine:3.15.2
+            args:
+            - "/bin/date"
+          restartPolicy: OnFailure
