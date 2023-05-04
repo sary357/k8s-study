@@ -15,7 +15,7 @@ spec:
         spec:
           containers:
           - name: batch-job
-            image: alpine:3.15.2
+            image: alpine:3.17.3
             args:
             - "/bin/date"
           restartPolicy: OnFailure
