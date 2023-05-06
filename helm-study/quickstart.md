@@ -198,10 +198,9 @@ Tip:
   Watch the deployment status using the command: kubectl get pods -w --namespace default
 ```
 
-- rollback (it DOES NOT work!!)
+- rollback
 ```
  $  helm rollback  mysql-1652232545
-Error: release: not found
 
 ```
 
@@ -211,4 +210,5 @@ Error: release: not found
 ```
 
 ## References
-- https://docs.helm.sh/docs/intro/quickstart/ 
+- [Quick Start(English)](https://docs.helm.sh/docs/intro/quickstart/) 
+- [Quick Start(中文版)](https://helm.sh/zh/docs/intro/install/)
