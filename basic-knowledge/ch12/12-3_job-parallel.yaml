@@ -5,8 +5,8 @@ metadata:
   labels:
     chapter: jobs
 spec:
-  parallelism: 5
-  completions: 10
+  parallelism: 5  # have 5 pods running at the same time
+  completions: 10  # have 10 pods in total
   template:
     metadata:
       labels:
