@@ -1,5 +1,5 @@
 # Source
-- All YAML files are the sample codes in [Kubernetes: Up and Running, 2nd Edition](https://www.oreilly.com/library/view/kubernetes-up-and/9781492046523/)
+- All YAML files are the sample codes in [Kubernetes: Up and Running, 3rd Edition](https://www.oreilly.com/library/view/kubernetes-up-and/9781098110192/)
 
 # Personal Notes
 - All YAML files can be applied `kubectl apply -f xxxx` on GKE version _v1.21.5-gke.1802_.
