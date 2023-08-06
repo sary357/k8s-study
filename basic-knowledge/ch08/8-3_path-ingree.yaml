@@ -7,18 +7,17 @@ spec:
   - host: bandicoot.example.com
     http:
       paths:
-        - path: "/"
-          pathType: Prefix
-          backend:
-            service:
-              name: bandicoot
-              port: 
-                number: 8080
-        - path: "/a/"
-          pathType: Prefix
-          backend:
-            service:
-              name: alpaca
-              port: 
-                number: 8080
-          
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: bandicoot
+            port:
+              number: 8080
+      - pathType: Prefix
+        path: "/a/"
+        backend:
+          service:
+            name: alpaca
+            port:
+              number: 8080

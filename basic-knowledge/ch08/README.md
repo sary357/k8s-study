@@ -68,7 +68,6 @@ NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE     SEL
 alpaca       ClusterIP   10.216.15.21   <none>        8080/TCP       46s     app=alpaca
 bandicoot    ClusterIP   10.216.15.71   <none>        8080/TCP       15s     app=bandicoot
 be-default   ClusterIP   10.216.11.67   <none>        8080/TCP       2m20s   app=be-default
-kubernetes   ClusterIP   10.216.0.1     <none>        443/TCP        251d    <none>
 
 ```
 

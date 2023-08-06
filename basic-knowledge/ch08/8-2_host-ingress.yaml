@@ -3,14 +3,19 @@ kind: Ingress
 metadata:
   name: host-ingress
 spec:
+  defaultBackend:
+    service:
+      name: be-default
+      port:
+        number: 8080
   rules:
   - host: alpaca.example.com
     http:
       paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: alpaca
-              port: 
-                number: 8080
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: alpaca
+            port:
+              number: 8080

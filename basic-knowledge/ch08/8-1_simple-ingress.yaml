@@ -3,13 +3,8 @@ kind: Ingress
 metadata:
   name: simple-ingress
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: alpaca
-            port: 
-              number: 8080
+  defaultBackend:
+    service:
+      name: alpaca
+      port:
+        number: 8080
