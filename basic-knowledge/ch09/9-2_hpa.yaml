@@ -7,6 +7,6 @@ spec:
     apiVersion: apps/v1
     kind: ReplicaSet
     name: kuard
-  minReplicas: 3
-  maxReplicas: 4
-  targetCPUUtilizationPercentage: 50
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
