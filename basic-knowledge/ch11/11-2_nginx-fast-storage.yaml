@@ -20,4 +20,4 @@ spec:
         ssd: "true"
       containers:
         - name: nginx
-          image: nginx:1.23.4
+          image: nginx:stable-alpine3.17-slim
