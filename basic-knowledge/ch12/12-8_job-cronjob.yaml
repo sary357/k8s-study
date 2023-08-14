@@ -3,11 +3,12 @@ kind: CronJob
 metadata:
   name: example-cron
 spec:
-  schedule: "*/3 * * * *"
+  # execute every 5 hours
+  schedule: "0 */5 * * *"
 
   # remove pods if it completes
-  # successfulJobsHistoryLimit: 0
-  # failedJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
 
   jobTemplate:
     spec:
@@ -15,7 +16,7 @@ spec:
         spec:
           containers:
           - name: batch-job
-            image: alpine:3.17.3
+            image: alpine:3.18.3
             args:
             - "/bin/date"
           restartPolicy: OnFailure
