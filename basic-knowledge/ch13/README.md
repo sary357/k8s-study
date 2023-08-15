@@ -123,3 +123,6 @@ type: Opaque
 ```
 $ kubectl create secret generic kuard-tls --from-file=kuard.crt --from-file=kuard.key  --dry-run=client  -o yaml | kubectl replace -f -
 ```
+
+## P.S.
+- DO NOT USE files `kuard.crt` and `kuard.crt` in production services. 
