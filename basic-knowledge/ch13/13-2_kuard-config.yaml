@@ -9,8 +9,9 @@ spec:
       imagePullPolicy: Always
       command:
         - "/kuard"
-        - "$(EXTRA_PARAM)"
+        - "${EXTRA_PARAM}"
       env:
+        # use environment variable in a container
         - name: ANOTHER_PARAM
           valueFrom:
             configMapKeyRef:
@@ -21,12 +22,14 @@ spec:
             configMapKeyRef:
               name: my-config
               key: extra-param
+
+  
+      # use a file in a container
       volumeMounts:
         - name: config-volume
           mountPath: /config
   volumes:
     - name: config-volume
       configMap:
-        name: my-config
-  restartPolicy: Never 
-          
+        name: my-config 
+  restartPolicy: Never   
