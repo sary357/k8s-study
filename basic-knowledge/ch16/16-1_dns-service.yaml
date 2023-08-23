@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
-metadata: 
+metadata:
   name: external-database
 spec:
   type: ExternalName
-  externalName: www.google.com
+  externalName: database.example.com
