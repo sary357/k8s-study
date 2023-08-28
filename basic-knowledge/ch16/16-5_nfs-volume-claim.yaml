@@ -7,9 +7,6 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 500Mi
-#  selector:
-#    matchLabels:
-#      volume: my-volume
+      storage: 1Gi
   volumeName: database-pv
   storageClassName: ""

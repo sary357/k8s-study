@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: database
+        image: mysql
+        resources:
+          requests:
+            cpu: 1
+            memory: 2Gi
+        env: # 不是真正安全的參數設定方式, 只是暫時用來簡化這個範例
+             # 正確應該要使用 Secret
+        - name: MYSQL_ROOT_PASSWORD
+          value: change-me
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+          - name: database
+            mountPath: /var/lib/mysql
+      volumes:
+      - name: database
+        persistentVolumeClaim:
+          claimName: database-pvc
+      
