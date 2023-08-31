@@ -98,3 +98,7 @@ mongo-2                                      2/2     Running   0          82s
 ```
 
 - Attention!! in `16-12_configmap.yaml`, This script currently sleeps forever after initializing the cluster. Every container in a Pod has to have the same RestartPolicy. Since we do not want our main Mongo container to be restarted, we need to have our initialization container run forever too, or else Kubernetes might think our Mongo Pod is unhealthy. This part is different from the 3rd edition.
+
+## 16-14_mongo.yaml 
+- only added `livenessProbe`.
+
