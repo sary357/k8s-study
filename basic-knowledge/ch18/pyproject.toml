@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ch18"
+version = "0.1.0"
+description = ""
+authors = ["Fu-Ming <716585+sary357@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+kubernetes = "^27.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
