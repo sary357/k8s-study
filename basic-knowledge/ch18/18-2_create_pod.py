@@ -1,6 +1,8 @@
 from kubernetes import client, config
 
 # refer to https://github.com/kubernetes-client/python/blob/master/examples/pod_exec.py
+#
+# create a POD
 
 config.load_kube_config()
 api=client.CoreV1Api()

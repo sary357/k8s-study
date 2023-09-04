@@ -6,7 +6,8 @@ from kubernetes import client, config
 
 # refer to
 # https://github.com/kubernetes-client/python/blob/master/examples/deployment_crud.py
-
+#
+# expand the number of replica to 3
 
 namespace="fuming-poc"
 

@@ -1,5 +1,9 @@
 from kubernetes import client, config
 
+##
+##
+# list PODs from 1) all namespaces and 2) from the namespace "fuming-poc"
+
 config.load_kube_config()
 api=client.CoreV1Api()
 
