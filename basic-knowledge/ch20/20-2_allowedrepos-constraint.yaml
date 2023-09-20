@@ -1,0 +1,19 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: repo-is-kuar-demo
+  annotations:
+    resource: https://github.com/open-policy-agent/gatekeeper-library/blob/master/library/general/allowedrepos/samples/repo-must-be-openpolicyagent/constraint.yaml
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+ #     - "default"  # sample in the book
+      - "fuming-poc"
+  parameters:
+    repos:
+      - "gcr.io/kuar-demo/"
+
