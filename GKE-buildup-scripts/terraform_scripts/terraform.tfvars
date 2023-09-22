@@ -1,0 +1,7 @@
+project_id = "gogox-analytics-non-prod"
+region     = "asia-southeast1"
+zone       = "asia-southeast1-a"
+my_name = "fuming"
+service_account = "tarraform-poc@gogox-analytics-non-prod.iam.gserviceaccount.com"
+gke_num_nodes = "2"
+gke_version = "1.27.5-gke.200"

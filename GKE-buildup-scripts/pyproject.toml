@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "gke-buildup-scripts"
+version = "0.1.0"
+description = ""
+authors = ["Fu-Ming <716585+sary357@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "gke_buildup_scripts"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+ansible = "^8.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
