@@ -24,6 +24,33 @@ variable "gke_version" {
   description = "GKE version"
 }
 
+variable "master_ipv4_network_range" {
+  description = "master ipv4 network range"
+}
+
+variable "service_account_json_path"{
+  description = "service account json path"
+}
+
+variable "cluster_ip_range" {
+  description = "POD IP range"
+}
+
+variable "services_ip_range" {
+  description = "service ip range"
+}
+
+variable "fuming_ip_range" {
+  description = "fuming ip range"
+}
+
+variable "vpn_ip_range_hk_vpn" {
+  description = "vpn ip range HK vpn"
+}
+
+variable "vpn_ip_range_sg_vpn" {
+  description = "vpn ip range SG vpn"
+}
 
 terraform {
     required_providers {
@@ -36,7 +63,7 @@ terraform {
 }
 
 provider "google" {
-    credentials = file("/Users/sary357/Desktop/gogox/gogox-analytics-non-prod-2a93cdbfc33e.json")
+    credentials = file("${var.service_account_json_path}")
     project = var.project_id
     region = var.region #"asia-southeast1"
     zone = var.zone #"asia-southeast1-a"
@@ -63,6 +90,41 @@ resource "google_container_cluster" "primary" {
 
   network    = google_compute_network.vpc_network.name
   subnetwork = google_compute_subnetwork.subnet.name
+
+
+  private_cluster_config {
+    enable_private_nodes = true
+    enable_private_endpoint = false
+    master_ipv4_cidr_block = "${var.master_ipv4_network_range}"
+    master_global_access_config {
+      enabled = false
+    }
+  }
+
+  master_authorized_networks_config {
+     cidr_blocks {
+       cidr_block = "${var.network_range}"
+       display_name = "internal network"
+     }
+    cidr_blocks {
+      cidr_block = "${var.cluster_ip_range}"
+      display_name = "internal network"
+     }
+     cidr_blocks {
+        cidr_block = "${var.services_ip_range}"
+        display_name = "internal network"
+     }
+     gcp_public_cidrs_access_enabled = false
+   }
+
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block = "${var.cluster_ip_range}"
+    services_ipv4_cidr_block = "${var.services_ip_range}"
+  }
+
+  service_external_ips_config {
+    enabled = true
+  }
 }
 
 # Separately Managed Node Pool

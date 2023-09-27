@@ -10,6 +10,10 @@ variable "my_name" {
   description = "my name"
 }
 
+variable "network_range" {
+  description = "network range"
+}
+
 # VPC
 resource "google_compute_network" "vpc_network" {
   name                    = "${var.project_id}-${var.my_name}-vpc"
@@ -22,5 +26,5 @@ resource "google_compute_subnetwork" "subnet" {
   name          = "${var.project_id}-${var.my_name}-subnet"
   region        = var.region
   network       = google_compute_network.vpc_network.name
-  ip_cidr_range = "192.168.0.0/24"
+  ip_cidr_range = "${var.network_range}"
 }
