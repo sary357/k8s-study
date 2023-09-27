@@ -114,8 +114,20 @@ resource "google_container_cluster" "primary" {
         cidr_block = "${var.services_ip_range}"
         display_name = "internal network"
      }
+     cidr_blocks {
+        cidr_block = "${var.fuming_ip_range}"
+        display_name = "Fu-Ming IP"
+     }
+     cidr_blocks {
+        cidr_block = "${var.vpn_ip_range_hk_vpn}"
+        display_name = "HK VPN IP"
+     }
+     cidr_blocks {
+        cidr_block = "${var.vpn_ip_range_sg_vpn}"
+        display_name = "SG VPN IP"
+     }
      gcp_public_cidrs_access_enabled = false
-   }
+  }
 
   ip_allocation_policy {
     cluster_ipv4_cidr_block = "${var.cluster_ip_range}"
