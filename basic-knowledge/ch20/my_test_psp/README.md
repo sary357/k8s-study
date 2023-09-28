@@ -1,6 +1,7 @@
 ## Objectives
 - In this folder, I put yaml files regarding how to set up PSP with validating webhook configuration.
 - All examples are from https://github.com/open-policy-agent/gatekeeper-library/tree/master/library/pod-security-policy/users
+- All of the content in this folder is not mentioned in the book.
 
 ## How to apply
 - apply `template.yaml`.
