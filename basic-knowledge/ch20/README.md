@@ -373,7 +373,7 @@ $ kubectl get pods  kuard -o=jsonpath="{.spec.containers[0].imagePullPolicy}"
 IfNotPresent
 ```
 
-- We can delete it and re-apply `20-3_compliant-pod.yaml` again. I found `mutation` is not retroactive (溯及既往) by default. Any resources that are created after mutation assignment is are still valid.
+- We can delete it and re-apply `20-3_compliant-pod.yaml` again. I found `mutation` is not retroactive (溯及既往) by default. Any resources that are created before mutation assignment is are still valid.
 ```
 $ kubectl delete -f 20-3_compliant-pod.yaml 
 pod "kuard" deleted
