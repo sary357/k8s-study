@@ -12,8 +12,8 @@ spec:
     kinds:
     - apiGroups: ["*"]
       kinds: ["Pod"]
-    excludedNamespaces: ["system"]
-  location: "spec.containers[name:*].imagePullPolicy"
+    excludedNamespaces: ["system"]                     # exclude namespace: system
+  location: "spec.containers[name:*].imagePullPolicy"  # we hope to define image pull policy is Always by default
   parameters:
     assign:
       value: Always
