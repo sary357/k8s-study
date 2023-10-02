@@ -1,3 +1,8 @@
+## admission flow
+- Kubernetes admission controllers are plugins that govern and enforce how the cluster is used. They can be thought of as a gatekeeper that intercept (authenticated) API requests and may change the request object or deny the request altogether. The admission control process has two phases: the mutating phase is executed first, followed by the validating phase. Consequently, admission controllers can act as mutating or validating controllers or as a combination of both. (source: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/)
+
+![admission flow](./images/admission_flow.png)
+
 ## install gatekeeper with helm
 - add helm repo
 ```
