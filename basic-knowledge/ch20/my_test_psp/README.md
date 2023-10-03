@@ -9,6 +9,7 @@
 $ kubectl create -f template.yaml 
 constrainttemplate.templates.gatekeeper.sh/k8spspallowedusers created
 ```
+- `template.yaml`: rego syntax
 
 - apply `contraint.yaml`
 ```

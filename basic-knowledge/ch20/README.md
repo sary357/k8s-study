@@ -163,6 +163,7 @@ webhooks:
 $ kubectl apply -f 20-1_allowedrepos-constraint-template.yaml 
 constrainttemplate.templates.gatekeeper.sh/k8sallowedrepos created 
 ```
+- `20-1_allowedrepos-constrating.yaml`: Rego syntax
 
 ## Configure constraint resource
 - define contraint resource. In fact, that's the policy that really defines what objects/resources are allowed to use.
